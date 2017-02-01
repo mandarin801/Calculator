@@ -24,14 +24,31 @@ public class Calculator {
         System.out.println("Your input " + secondValue + " as a second number.\n");
         double firstNumber = Double.parseDouble(firstValue);
         double secondNumber = Double.parseDouble(secondValue);
-        System.out.println("Sum is " + (firstNumber + secondNumber) + "\n" +
-                "Difference is " + (firstNumber - secondNumber) + "\n" +
-                "Multiplication is " + (firstNumber * secondNumber) + "\n");
-        if (secondNumber == 0) {
-            System.out.println("Division by zero");
-        } else {
-            System.out.println("Division is " + (firstNumber / secondNumber) + "\n");
+        System.out.println("Please input action: (+, -, / or * required)");
+        String inputAction = scanner.next();
+        char action = inputAction.charAt(0);
+        System.out.println(action);
+        while (!(action == '+') && !(action == '-') && !(action == '/') && !(action == '*')){
+            System.out.println("Wrong Value! Please input action: (+, -, / or * required)");
+            inputAction = scanner.next();
+            action = inputAction.charAt(0);
         }
+        switch (inputAction) {
+            case "+":    System.out.println("Sum is " + (firstNumber + secondNumber) + "\n");
+                break;
+            case "-":    System.out.println("Difference is " + (firstNumber - secondNumber) + "\n");
+                break;
+            case "/":    System.out.println("Multiplication is " + (firstNumber * secondNumber) + "\n");
+                break;
+            case "*":
+                if (secondNumber == 0) {
+                    System.out.println("Division by zero");
+                } else {
+                    System.out.println("Division is " + (firstNumber / secondNumber) + "\n");
+                }
+                break;
+        }
+
     }
     private static boolean isNumeric(String str)
     {
@@ -39,7 +56,7 @@ public class Calculator {
         {
             double d = Double.parseDouble(str);
         }
-        catch(NumberFormatException nfe)
+        catch(NumberFormatException e)
         {
             return false;
         }
