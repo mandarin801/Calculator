@@ -25,9 +25,6 @@ public class MassParser {
         String gramsName = " grams ";
         String kilosName = " kilos ";
         String tonsName = " tons ";
-
-
-        System.out.println(numberOfDigits);
         switch (numberOfDigits) {
             case 0:
                 grams = new StringBuffer(mass);
