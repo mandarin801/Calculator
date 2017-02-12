@@ -7,6 +7,8 @@ package lesson5;
 public class Main {
     public static void main(String[] args) {
         Reversion reversion = new Reversion();
-        System.out.println(reversion.revertAll("123456"));
+        //System.out.println(reversion.revertAll("123456"));
+        MassParser massParser = new MassParser();
+        System.out.println(massParser.parse("12300000.876"));
     }
 }
