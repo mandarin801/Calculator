@@ -8,48 +8,47 @@ import java.util.ListIterator;
 /**
  * Created by mandarin80 on 01.03.17.
  */
-public class MyList<E> implements List {
-    private Element head;
-    private Element tail;
-
+public class MyList implements List {
+    Element first;
 
 
     @Override
     public int size() {
-        Element counter = head;
+        Element current = first;
         int size = 0;
-        if (head.getElement() != null){
+        if (first.getElement() != null){
             size = 1;
         }
-        while (counter.getNext() != null) {
+        while (current.getNext() != null) {
             size++;
-            counter = counter.getNext();
+            current = current.getNext();
         }
         return size;
     }
 
     @Override
     public boolean isEmpty() {
-        if(head == null && tail == null) {
+        if(first == null) {
             return true;
         } else return false;
     }
 
     @Override
     public boolean contains(Object o) {
-        Element iterator = head;
-        while (iterator.getNext() != null){
-            if (iterator.getElement().equals(o)){
+        Element current = first;
+        while (current.getNext() != null){
+            if (current.getElement().equals(o)){
                 return true;
             }
-            iterator = iterator.getNext();
+            current = current.getNext();
         }
         return false;
     }
 
     @Override
     public Iterator iterator() {
-        return null;
+        MyIterator iterator = new MyIterator(first);
+        return iterator;
     }
 
     @Override
@@ -57,34 +56,37 @@ public class MyList<E> implements List {
         return new Object[0];
     }
 
-    @Override
     public boolean add(Object o) {
-        Element element = new Element();
-        if (head == null) {
-            head = element;
+        if (first == null) {
+            first = new Element(null, o);
         } else {
-            element.setPrevious(tail);
-            tail.setNext(element);
+            Element last = findLast();
+            last.setNext(new Element(null, o));
         }
-        element.setData(o);
-        tail = element;
         return true;
+    }
+
+    private Element findLast() {
+        Element current = first;
+        while (current.getNext() != null){
+            current = current.getNext();
+        }
+        return current;
     }
 
     @Override
     public boolean remove(Object o) {
-        Element iterator = head;
-        Element next = null;
+        Element current = first;
+        Element next;
         Element previous = null;
-        while (iterator.getNext() != null){
-            if (iterator.getElement().equals(o)){
-                next = iterator.getNext();
-                previous = iterator.getPrevious();
-                next.setPrevious(previous);
+        while (current.getNext() != null){
+            if (current.getElement().equals(o)){
+                next = current.getNext();
                 previous.setNext(next);
                 return true;
             }
-            iterator = iterator.getNext();
+            previous = current;
+            current = current.getNext();
         }
         return false;
     }
@@ -92,9 +94,8 @@ public class MyList<E> implements List {
     @Override
     public boolean addAll(Collection c) {
         MyList second = (MyList) c;
-        Element firstTail = this.tail;
-        Element secondHead = second.head;
-        secondHead.setPrevious(firstTail);
+        Element firstTail = findLast();
+        Element secondHead = second.first;
         firstTail.setNext(secondHead);
         return true;
     }
@@ -106,8 +107,7 @@ public class MyList<E> implements List {
 
     @Override
     public void clear() {
-        this.head = null;
-        this.tail = null;
+        this.first = null;
     }
 
     @Override

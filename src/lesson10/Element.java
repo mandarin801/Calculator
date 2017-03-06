@@ -3,17 +3,20 @@ package lesson10;
 /**
  * Created by mandarin80 on 02.03.17.
  */
-public class Element<E> extends Object{
+public class Element {
 
     private Element next;
-    private Element previous;
-    private E data;
+    private Object data;
 
+    public Element (Element next, Object data) {
+        this.next = next;
+        this.data = data;
+    }
     public Object getElement() {
         return data;
     }
 
-    public void setData(E data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
@@ -25,11 +28,4 @@ public class Element<E> extends Object{
         this.next = next;
     }
 
-    public Element getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Element previous) {
-        this.previous = previous;
-    }
 }
