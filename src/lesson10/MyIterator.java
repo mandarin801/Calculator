@@ -14,18 +14,13 @@ public class MyIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        if (current.getNext() != null){
-            return true;
-        }
-        return false;
+        return current!=null;
     }
 
     @Override
     public Object next() {
-        if (current.getNext() == null) {
-            throw new IndexOutOfBoundsException("End of list.");
-        }
-        else current = current.getNext();
-        return current;
+        Object toReturn = current.getElement();
+        current = current.getNext();
+        return toReturn;
     }
 }
