@@ -43,9 +43,11 @@ public class MyHashMap<K, V> implements Map {
     @Override
     public boolean containsValue(Object value) {
         for (LinkedList<Entry> l : table) {
-            for (Entry e : l) {
-                if (e.getValue().equals(value)){
-                    return true;
+            if(l != null){
+                for (Entry e : l) {
+                    if (e.getValue().equals(value)){
+                        return true;
+                    }
                 }
             }
         }
@@ -119,9 +121,10 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public void clear() {
-        for (LinkedList l : table) {
-            if(l != null){
-                l = null;
+        for (int i = 0; i< table.length; i++) {
+            if(table[i] != null){
+                table[i] = null;
+                size = 0;
             }
         }
     }

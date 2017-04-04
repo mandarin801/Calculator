@@ -22,6 +22,7 @@ public class Main {
         myHashMap.keySet();
         myHashMap.values();
         myHashMap.entrySet();
+        myHashMap.clear();
         System.out.println("Ok");
         for (Object o: myHashMap.keySet()) {
             System.out.println(myHashMap.get(o).toString());
